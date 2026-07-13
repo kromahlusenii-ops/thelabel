@@ -1,0 +1,811 @@
+const DATA = {
+  coat: {
+    mono: 'WOOL BLEND COAT \u00b7 ARKET \u00b7 $340',
+    verdict: 'You\u2019re paying for the name.',
+    reason: 'The cut is gorgeous. The cloth is 58% polyester. It\u2019ll pill by February.',
+    worthStr: '$165', costsStr: '$340', nameStr: '$168', est: 74,
+    facts: [
+      { t: '42% WOOL \u00b7 58% POLYESTER', ok: true },
+      { t: '430GSM \u00b7 COAT-WEIGHT MELTON', ok: true },
+      { t: 'CUT + SEWN \u00b7 PORTUGAL', ok: true }
+    ],
+    pending: 'RESALE COMPS\u2026',
+    vsName: 'ARKET WOOL COAT', vsSub: 'FW26 \u00b7 WOOL BLEND \u00b7 PORTUGAL',
+    rLines: [
+      { l: '42% WOOL, 58% POLY \u00b7 430GSM', a: '$34' },
+      { l: 'FULL LINING, HORN BUTTONS', a: '$11' },
+      { l: 'CUT + SEWN \u00b7 PORTUGAL', a: '$21' },
+      { l: 'TRIMS, LABELS, FREIGHT', a: '$8' }
+    ],
+    rTotals: [
+      { l: 'THE GARMENT', a: '$74', w: 600, c: '#1A1F26' },
+      { l: 'WHAT IT SHOULD HANG AT', a: '$150\u2013185', w: 400, c: '#1A1F26' },
+      { l: 'WHAT THE TAG SAYS', a: '$340', w: 400, c: '#1A1F26' },
+      { l: 'THE NAME', a: '$168', w: 600, c: '#E64A6B' }
+    ],
+    stamp: 'PAYING FOR THE NAME',
+    rFooter: 'HOLDS 31% AT RESALE \u00b7 READTHELABEL.APP/4417',
+    alts: [
+      { name: 'Melton overcoat', brand: 'COMMUNITY CLOTHING', price: '$128', line: 'Same mill. Same 430gsm melton. Twice the wool, a third of the name.' },
+      { name: 'Recycled wool coat', brand: 'UNIQLO U', price: '$149', line: '60% wool at the same weight. The tag and the label agree for once.' },
+      { name: 'Half-canvas topcoat', brand: 'SPIER & MACKAY', price: '$258', line: '100% wool, horn buttons, real canvassing. Costs more because it is more.' }
+    ]
+  },
+  oxford: {
+    mono: 'OXFORD SHIRT \u00b7 UNIQLO \u00b7 $50',
+    verdict: 'Worth the closet space.',
+    reason: 'Real cotton, real placket, honest markup. This is what clothes used to cost.',
+    worthStr: '$47', costsStr: '$50', nameStr: '$3', est: 19,
+    facts: [
+      { t: '100% COTTON \u00b7 LONG-STAPLE', ok: true },
+      { t: '140GSM OXFORD CLOTH', ok: true },
+      { t: 'CUT + SEWN \u00b7 VIETNAM', ok: true }
+    ],
+    pending: 'RESALE COMPS\u2026',
+    vsName: 'UNIQLO OXFORD SHIRT', vsSub: 'FW26 \u00b7 COTTON \u00b7 VIETNAM',
+    rLines: [
+      { l: 'LONG-STAPLE COTTON \u00b7 140GSM', a: '$7' },
+      { l: 'COLLAR, PLACKET, BUTTONS', a: '$3' },
+      { l: 'CUT + SEWN \u00b7 VIETNAM', a: '$6' },
+      { l: 'TRIMS, LABELS, FREIGHT', a: '$3' }
+    ],
+    rTotals: [
+      { l: 'THE GARMENT', a: '$19', w: 600, c: '#1A1F26' },
+      { l: 'WHAT IT SHOULD HANG AT', a: '$42\u201352', w: 400, c: '#1A1F26' },
+      { l: 'WHAT THE TAG SAYS', a: '$50', w: 400, c: '#1A1F26' },
+      { l: 'THE NAME', a: '$3', w: 600, c: '#1A1F26' }
+    ],
+    stamp: 'HONEST TAG',
+    rFooter: 'HOLDS 46% AT RESALE \u00b7 READTHELABEL.APP/0212',
+    alts: []
+  },
+  slip: {
+    mono: 'SLIP DRESS \u00b7 REFORMATION \u00b7 $248',
+    verdict: 'Great fabric, bad math.',
+    reason: 'Lovely drape. Viscose money is not silk money. It hits $149 every January.',
+    worthStr: '$110', costsStr: '$248', nameStr: '$138', est: 41,
+    facts: [
+      { t: '100% VISCOSE', ok: true },
+      { t: '90GSM \u00b7 FLUID TWILL', ok: true },
+      { t: 'CUT + SEWN \u00b7 CHINA', ok: true }
+    ],
+    pending: 'RESALE COMPS\u2026',
+    vsName: 'REFORMATION SLIP DRESS', vsSub: 'FW26 \u00b7 VISCOSE \u00b7 CHINA',
+    rLines: [
+      { l: '100% VISCOSE \u00b7 90GSM', a: '$14' },
+      { l: 'BIAS CUT, FRENCH SEAMS', a: '$9' },
+      { l: 'CUT + SEWN \u00b7 CHINA', a: '$12' },
+      { l: 'TRIMS, LABELS, FREIGHT', a: '$6' }
+    ],
+    rTotals: [
+      { l: 'THE GARMENT', a: '$41', w: 600, c: '#1A1F26' },
+      { l: 'WHAT IT SHOULD HANG AT', a: '$90\u2013115', w: 400, c: '#1A1F26' },
+      { l: 'WHAT THE TAG SAYS', a: '$248', w: 400, c: '#1A1F26' },
+      { l: 'THE NAME', a: '$138', w: 600, c: '#E64A6B' }
+    ],
+    stamp: 'BAD MATH',
+    rFooter: 'HITS $149 EVERY JANUARY \u00b7 READTHELABEL.APP/3308',
+    alts: [
+      { name: 'Washable silk slip', brand: 'QUINCE', price: '$80', line: 'Actual silk, for less than viscose money. Read that twice.' },
+      { name: 'Viscose midi slip', brand: '& OTHER STORIES', price: '$89', line: 'Same 90gsm viscose, same drape. Priced like viscose.' }
+    ]
+  },
+  jeans: {
+    mono: '501 JEANS \u00b7 LEVI\u2019S \u00b7 $128',
+    verdict: 'It\u2019s a dupe of itself.',
+    reason: 'Same mill, same 12oz denim as their own $70 pair. You\u2019re buying the red tab.',
+    worthStr: '$68', costsStr: '$128', nameStr: '$60', est: 28,
+    facts: [
+      { t: '100% COTTON DENIM', ok: true },
+      { t: '12OZ \u00b7 RIGHT-HAND TWILL', ok: true },
+      { t: 'CUT + SEWN \u00b7 BANGLADESH', ok: true }
+    ],
+    pending: 'RESALE COMPS\u2026',
+    vsName: 'LEVI\u2019S 501 JEANS', vsSub: 'FW26 \u00b7 COTTON DENIM \u00b7 BANGLADESH',
+    rLines: [
+      { l: '12OZ COTTON DENIM', a: '$9' },
+      { l: 'RIVETS, RED TAB, HARDWARE', a: '$4' },
+      { l: 'CUT + SEWN \u00b7 BANGLADESH', a: '$10' },
+      { l: 'WASH, FINISH, FREIGHT', a: '$5' }
+    ],
+    rTotals: [
+      { l: 'THE GARMENT', a: '$28', w: 600, c: '#1A1F26' },
+      { l: 'WHAT IT SHOULD HANG AT', a: '$60\u201375', w: 400, c: '#1A1F26' },
+      { l: 'WHAT THE TAG SAYS', a: '$128', w: 400, c: '#1A1F26' },
+      { l: 'THE NAME', a: '$60', w: 600, c: '#E64A6B' }
+    ],
+    stamp: 'A DUPE OF ITSELF',
+    rFooter: 'HOLDS 43% AT RESALE \u00b7 READTHELABEL.APP/5501',
+    alts: [
+      { name: '505 regular fit', brand: 'LEVI\u2019S', price: '$70', line: 'Same mill. Same 12oz denim. No red-tab tax.' },
+      { name: 'Selvedge straight jeans', brand: 'UNIQLO', price: '$50', line: 'Heavier denim, chain-stitched hems, a third of the tag.' }
+    ]
+  },
+  jacket: {
+    mono: 'FAUX LEATHER JACKET \u00b7 ZARA \u00b7 $189',
+    verdict: 'All tag, no cloth.',
+    reason: 'It\u2019s plastic. Beautifully cut plastic, but plastic, and it will crack at the elbows.',
+    worthStr: '$52', costsStr: '$189', nameStr: '$137', est: 23,
+    facts: [
+      { t: '100% POLYURETHANE', ok: true },
+      { t: 'WEIGHT \u2014 NOT LISTED', ok: false },
+      { t: 'CUT + SEWN \u00b7 TURKEY', ok: true }
+    ],
+    pending: 'RESALE COMPS\u2026',
+    vsName: 'ZARA FAUX LEATHER JACKET', vsSub: 'FW26 \u00b7 POLYURETHANE \u00b7 TURKEY',
+    rLines: [
+      { l: 'POLYURETHANE SHELL', a: '$6' },
+      { l: 'ZIPS + HARDWARE', a: '$5' },
+      { l: 'CUT + SEWN \u00b7 TURKEY', a: '$9' },
+      { l: 'TRIMS, LABELS, FREIGHT', a: '$3' }
+    ],
+    rTotals: [
+      { l: 'THE GARMENT', a: '$23', w: 600, c: '#1A1F26' },
+      { l: 'WHAT IT SHOULD HANG AT', a: '$45\u201360', w: 400, c: '#1A1F26' },
+      { l: 'WHAT THE TAG SAYS', a: '$189', w: 400, c: '#1A1F26' },
+      { l: 'THE NAME', a: '$137', w: 600, c: '#E64A6B' }
+    ],
+    stamp: 'ALL TAG, NO CLOTH',
+    rFooter: 'HOLDS 12% AT RESALE \u00b7 READTHELABEL.APP/7719',
+    alts: [
+      { name: 'Leather bomber', brand: 'QUINCE', price: '$130', line: 'Lambskin. Real hide, for less than the plastic.' },
+      { name: 'Vintage leather jacket', brand: 'RESALE \u00b7 EBAY', price: '~$85', line: 'Already broken in. Will outlive the elbows on this one.' }
+    ]
+  },
+  knit: {
+    mono: 'MERINO KNIT \u00b7 COS \u00b7 $135',
+    verdict: 'They won\u2019t say.',
+    reason: 'No fiber content on the page. Brands proud of the cloth tell you about the cloth.',
+    worthStr: '\u2014', costsStr: '$135', nameStr: '?', est: 0,
+    facts: [
+      { t: 'FIBER CONTENT \u2014 NOT LISTED', ok: false },
+      { t: 'WEIGHT \u2014 NOT LISTED', ok: false },
+      { t: 'COUNTRY \u2014 NOT LISTED', ok: false }
+    ],
+    pending: 'READING BETWEEN THE LINES\u2026',
+    vsName: 'COS MERINO KNIT', vsSub: 'FW26 \u00b7 UNKNOWN \u00b7 UNKNOWN',
+    rLines: [
+      { l: 'FIBER CONTENT', a: 'NOT LISTED' },
+      { l: 'WEIGHT', a: 'NOT LISTED' },
+      { l: 'COUNTRY', a: 'NOT LISTED' },
+      { l: 'CONFIDENCE OF THE BRAND', a: 'LOW' }
+    ],
+    rTotals: [
+      { l: 'THE GARMENT', a: '?', w: 600, c: '#1A1F26' },
+      { l: 'WHAT IT SHOULD HANG AT', a: '?', w: 400, c: '#1A1F26' },
+      { l: 'WHAT THE TAG SAYS', a: '$135', w: 400, c: '#1A1F26' },
+      { l: 'THE NAME', a: 'ALL OF IT?', w: 600, c: '#E64A6B' }
+    ],
+    stamp: 'THEY WON\u2019T SAY',
+    rFooter: 'NO LABEL \u00b7 NO COMPS \u00b7 READTHELABEL.APP/0000',
+    alts: [
+      { name: 'Extra-fine merino crew', brand: 'UNIQLO', price: '$50', line: '100% merino \u2014 says so in the first line of the page.' },
+      { name: 'Merino crewneck', brand: 'QUINCE', price: '$65', line: 'Fiber, gauge and mill, all on the page. That\u2019s the tell.' }
+    ]
+  }
+};
+
+const SCORECARD = {
+  coat: {
+    itemName: 'Wool Blend Coat', brand: 'ARKET', meta: 'FW26 \u00b7 SEWN IN PORTUGAL \u00b7 READ 13 JUL',
+    price: '$340', shouldHang: 'should hang at $150\u2013185',
+    bar: { garment: 74, margin: 98, name: 168, total: 340 },
+    rows: [
+      { factor: 'Fabric', sub: '62% of cost', evidence: '42% wool, 58% polyester at 430gsm. Real weight, but the majority fiber is plastic\u00a0\u2014 and Arket doesn\u2019t say which. Wool this blended pills at the friction points.', source: 'CATEGORY AVG AT THIS PRICE: 70\u2013100% WOOL', grade: 'POOR', color: 'red' },
+      { factor: 'Construction', sub: '$32 of build', evidence: 'Fully lined, real horn buttons, set-in sleeves, pattern-matched at the seam. Somebody who knew what they were doing made this.', source: 'SEWN IN PORTUGAL \u00b7 ~$21 CMT', grade: 'STRONG', color: 'green' },
+      { factor: 'The multiple', sub: 'retail \u00f7 cost', evidence: '4.6x. Wholesale brands run 2.1\u20132.4x; direct-to-consumer 3\u20135x. Arket is at the top of the DTC band while sourcing at high-street fabric quality.', source: '4.6x \u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2591\u2591 FAIR: 2.2x', grade: '4.6x', color: 'red' },
+      { factor: 'Price history', sub: '18 months', evidence: 'Has never sold out at full price. Marked to $204 in each of the last two Novembers, then $170 in January. The $340 is a number, not a price.', source: '$340 \u2192 $204 (NOV) \u2192 $170 (JAN)', grade: 'WAIT', color: 'amber' },
+      { factor: 'Resale', sub: 'what it holds', evidence: 'Sells secondhand around $105 in good condition. That\u2019s 31% of retail\u00a0\u2014 poor for outerwear, where wool coats typically hold 40\u201355%. The market has already priced the polyester.', source: '31% HOLD \u00b7 47 SOLD COMPS \u00b7 90 DAYS', grade: '31%', color: 'red' },
+      { factor: 'How it ages', sub: 'from 340 reviews', evidence: 'Pilling under the arms and at the bag strap is the most common complaint after one season. Twelve reviewers mention the lining tearing at the vent.', source: '\u201cPILL\u201d IN 61 REVIEWS \u00b7 \u201cLINING\u201d IN 12', grade: 'POOR', color: 'red' }
+    ],
+    confidence: 'Confidence: high\u00a0\u2014 fiber, weight and origin were all listed. Costs are estimates from category benchmarks, not Arket\u2019s books.'
+  },
+  oxford: {
+    itemName: 'Oxford Shirt', brand: 'UNIQLO', meta: 'FW26 \u00b7 SEWN IN VIETNAM \u00b7 READ 13 JUL',
+    price: '$50', shouldHang: 'should hang at $42\u201352',
+    bar: { garment: 19, margin: 28, name: 3, total: 50 },
+    rows: [
+      { factor: 'Fabric', sub: '37% of cost', evidence: '100% long-staple cotton at 140gsm. Proper oxford cloth\u00a0\u2014 the basket weave is visible. No blends hiding in the small print.', source: 'CATEGORY AVG AT THIS PRICE: 100% COTTON', grade: 'STRONG', color: 'green' },
+      { factor: 'Construction', sub: '$9 of build', evidence: 'Single-needle side seams, reinforced gusset, ocean shell buttons. Clean work for the price point.', source: 'SEWN IN VIETNAM \u00b7 ~$6 CMT', grade: 'STRONG', color: 'green' },
+      { factor: 'The multiple', sub: 'retail \u00f7 cost', evidence: '2.6x. Right in the middle of the wholesale band. This is what honest pricing looks like at scale.', source: '2.6x \u2588\u2588\u2588\u2588\u2588\u2591\u2591\u2591\u2591\u2591\u2591\u2591 FAIR: 2.2x', grade: '2.6x', color: 'green' },
+      { factor: 'Price history', sub: '18 months', evidence: 'Holds at $50 year-round. No fake markdowns, no anchor pricing. What you see is what it costs.', source: '$50 \u2192 $50 (STABLE)', grade: 'STRONG', color: 'green' },
+      { factor: 'Resale', sub: 'what it holds', evidence: 'Sells secondhand around $23 in good condition. 46% hold is excellent for a $50 shirt\u00a0\u2014 people trust the product.', source: '46% HOLD \u00b7 83 SOLD COMPS \u00b7 90 DAYS', grade: '46%', color: 'green' },
+      { factor: 'How it ages', sub: 'from 1,200 reviews', evidence: 'Gets softer with every wash. Collar roll improves over time. The occasional complaint about shrinkage if tumble-dried hot.', source: '\u201cSOFTER\u201d IN 94 REVIEWS \u00b7 \u201cSHRINK\u201d IN 31', grade: 'STRONG', color: 'green' }
+    ],
+    confidence: 'Confidence: high\u00a0\u2014 fiber, weight and origin were all listed. Costs are estimates from category benchmarks, not Uniqlo\u2019s books.'
+  },
+  slip: {
+    itemName: 'Slip Dress', brand: 'REFORMATION', meta: 'FW26 \u00b7 SEWN IN CHINA \u00b7 READ 13 JUL',
+    price: '$248', shouldHang: 'should hang at $90\u2013115',
+    bar: { garment: 41, margin: 69, name: 138, total: 248 },
+    rows: [
+      { factor: 'Fabric', sub: '34% of cost', evidence: '100% viscose at 90gsm. Lovely drape, but viscose is a $4\u20136/yard fabric. Reformation charges silk prices for wood pulp.', source: 'CATEGORY AVG AT THIS PRICE: SILK OR SILK BLEND', grade: 'POOR', color: 'red' },
+      { factor: 'Construction', sub: '$21 of build', evidence: 'Bias cut with French seams. Good technique, and it matters on a slip\u00a0\u2014 the seams show through. But bias-cut viscose is standard, not premium.', source: 'SEWN IN CHINA \u00b7 ~$12 CMT', grade: 'OK', color: 'amber' },
+      { factor: 'The multiple', sub: 'retail \u00f7 cost', evidence: '6.0x. Well above the DTC ceiling. The sustainability story is doing a lot of heavy lifting on this margin.', source: '6.0x \u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588 FAIR: 2.2x', grade: '6.0x', color: 'red' },
+      { factor: 'Price history', sub: '18 months', evidence: 'Hits $149 every January and again in June. The $248 is a starting bid, not a price. Wait for the markdown.', source: '$248 \u2192 $149 (JAN) \u2192 $149 (JUN)', grade: 'WAIT', color: 'amber' },
+      { factor: 'Resale', sub: 'what it holds', evidence: 'Sells secondhand around $75. That\u2019s 30% of retail\u00a0\u2014 and roughly what the January sale price implies it\u2019s actually worth.', source: '30% HOLD \u00b7 62 SOLD COMPS \u00b7 90 DAYS', grade: '30%', color: 'red' },
+      { factor: 'How it ages', sub: 'from 280 reviews', evidence: 'Viscose wrinkles if you look at it. Multiple reviewers note the straps stretching after a few wears. Dry-clean-only for a $248 viscose dress.', source: '\u201cWRINKLE\u201d IN 47 REVIEWS \u00b7 \u201cSTRAP\u201d IN 19', grade: 'POOR', color: 'red' }
+    ],
+    confidence: 'Confidence: high\u00a0\u2014 fiber, weight and origin were all listed. Costs are estimates from category benchmarks, not Reformation\u2019s books.'
+  },
+  jeans: {
+    itemName: '501 Jeans', brand: 'LEVI\u2019S', meta: 'FW26 \u00b7 SEWN IN BANGLADESH \u00b7 READ 13 JUL',
+    price: '$128', shouldHang: 'should hang at $60\u201375',
+    bar: { garment: 28, margin: 40, name: 60, total: 128 },
+    rows: [
+      { factor: 'Fabric', sub: '32% of cost', evidence: '100% cotton, 12oz right-hand twill. The same denim Levi\u2019s uses in their $70 505. No stretch, no blends\u00a0\u2014 honest cloth.', source: 'SAME MILL AS LEVI\u2019S 505 ($70)', grade: 'STRONG', color: 'green' },
+      { factor: 'Construction', sub: '$14 of build', evidence: 'Chain-stitched hem, riveted stress points, the classic five-pocket pattern. Well-made but not differently-made from the cheaper line.', source: 'SEWN IN BANGLADESH \u00b7 ~$10 CMT', grade: 'OK', color: 'amber' },
+      { factor: 'The multiple', sub: 'retail \u00f7 cost', evidence: '4.6x. The 505 runs 2.3x on the same denim. The 501 name carries a 2x premium over the functionally identical pant.', source: '4.6x \u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2591\u2591 FAIR: 2.2x', grade: '4.6x', color: 'red' },
+      { factor: 'Price history', sub: '18 months', evidence: 'Frequently at $89\u2013$98 on Amazon and at outlet. The $128 MSRP exists to make $98 feel like a deal.', source: '$128 \u2192 $98 (FREQUENT) \u2192 $89 (OUTLET)', grade: 'WAIT', color: 'amber' },
+      { factor: 'Resale', sub: 'what it holds', evidence: '43% hold at resale. Strong for denim at this price\u00a0\u2014 the 501 name has genuine cultural equity even if the margin is inflated.', source: '43% HOLD \u00b7 210 SOLD COMPS \u00b7 90 DAYS', grade: '43%', color: 'amber' },
+      { factor: 'How it ages', sub: 'from 890 reviews', evidence: 'Fades beautifully with wear. The main complaint is inconsistent sizing between pairs\u00a0\u2014 a quality control issue, not a materials one.', source: '\u201cFADE\u201d IN 112 REVIEWS \u00b7 \u201cSIZING\u201d IN 87', grade: 'OK', color: 'amber' }
+    ],
+    confidence: 'Confidence: high\u00a0\u2014 fiber, weight and origin were all listed. Costs are estimates from category benchmarks, not Levi\u2019s\u2019 books.'
+  },
+  jacket: {
+    itemName: 'Faux Leather Jacket', brand: 'ZARA', meta: 'FW26 \u00b7 SEWN IN TURKEY \u00b7 READ 13 JUL',
+    price: '$189', shouldHang: 'should hang at $45\u201360',
+    bar: { garment: 23, margin: 29, name: 137, total: 189 },
+    rows: [
+      { factor: 'Fabric', sub: '26% of cost', evidence: '100% polyurethane. It\u2019s plastic film on a woven backing. Zara won\u2019t list the weight, which tells you about the weight.', source: 'CATEGORY AVG AT THIS PRICE: REAL LEATHER', grade: 'POOR', color: 'red' },
+      { factor: 'Construction', sub: '$14 of build', evidence: 'Clean topstitching, decent hardware. The cut is genuinely good\u00a0\u2014 Zara\u2019s pattern-makers earn their keep. But the material limits the lifespan.', source: 'SEWN IN TURKEY \u00b7 ~$9 CMT', grade: 'OK', color: 'amber' },
+      { factor: 'The multiple', sub: 'retail \u00f7 cost', evidence: '8.2x. The highest in this set. PU is one of the cheapest shell materials available\u00a0\u2014 the gap between cost and tag is enormous.', source: '8.2x \u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588 FAIR: 2.2x', grade: '8.2x', color: 'red' },
+      { factor: 'Price history', sub: '18 months', evidence: 'Hits $99 at end-of-season. A new version drops every September with the same pattern in the same PU. Last year\u2019s is indistinguishable.', source: '$189 \u2192 $129 (NOV) \u2192 $99 (JAN)', grade: 'WAIT', color: 'amber' },
+      { factor: 'Resale', sub: 'what it holds', evidence: '12% hold. The worst in this set. Nobody pays real money for secondhand plastic\u00a0\u2014 the market knows what this is.', source: '12% HOLD \u00b7 18 SOLD COMPS \u00b7 90 DAYS', grade: '12%', color: 'red' },
+      { factor: 'How it ages', sub: 'from 190 reviews', evidence: 'Cracking and peeling at the elbows within one season is the top complaint. PU doesn\u2019t age\u00a0\u2014 it degrades.', source: '\u201cCRACK\u201d IN 34 REVIEWS \u00b7 \u201cPEEL\u201d IN 28', grade: 'POOR', color: 'red' }
+    ],
+    confidence: 'Confidence: medium\u00a0\u2014 fiber and origin were listed but weight was not. Costs are estimates from category benchmarks, not Zara\u2019s books.'
+  },
+  knit: {
+    itemName: 'Merino Knit', brand: 'COS', meta: 'FW26 \u00b7 ORIGIN NOT LISTED \u00b7 READ 13 JUL',
+    price: '$135', shouldHang: 'should hang at\u00a0?',
+    bar: { garment: 0, margin: 0, name: 135, total: 135 },
+    rows: [
+      { factor: 'Fabric', sub: 'unknown', evidence: 'No fiber content on the product page. \u201cMerino knit\u201d is the name, not the composition. It could be 100% merino or 20% merino and 80% acrylic.', source: 'FIBER CONTENT: NOT LISTED', grade: 'NO DATA', color: 'red' },
+      { factor: 'Construction', sub: 'unknown', evidence: 'No information on gauge, knit type, or finishing. The product images suggest a fine-gauge jersey knit, but COS won\u2019t confirm.', source: 'GAUGE / KNIT TYPE: NOT LISTED', grade: 'NO DATA', color: 'red' },
+      { factor: 'The multiple', sub: 'retail \u00f7 cost', evidence: 'Cannot calculate. Without knowing the fiber, weight, or origin, there is no cost to divide into. That\u2019s the point.', source: '? \u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591 FAIR: 2.2x', grade: '?', color: 'red' },
+      { factor: 'Price history', sub: '18 months', evidence: 'Drops to $95 in January sales. COS cycles knit colours seasonally, so last season\u2019s shade hits the sale rack reliably.', source: '$135 \u2192 $95 (JAN SALE)', grade: 'WAIT', color: 'amber' },
+      { factor: 'Resale', sub: 'what it holds', evidence: 'Insufficient comps. COS knits don\u2019t move in volume on resale platforms\u00a0\u2014 which itself is a data point.', source: '<10 SOLD COMPS \u00b7 90 DAYS', grade: 'LOW', color: 'red' },
+      { factor: 'How it ages', sub: 'from 85 reviews', evidence: 'Mixed. Some say it pills immediately, others say it holds up. Without knowing the fiber blend, both could be true of different production runs.', source: '\u201cPILL\u201d IN 22 REVIEWS \u00b7 \u201cSOFT\u201d IN 31', grade: 'UNCLEAR', color: 'amber' }
+    ],
+    confidence: 'Confidence: low\u00a0\u2014 fiber content, weight and origin were all missing from the product page. We cannot estimate costs without this information.'
+  }
+};
+
+const RACK_ITEMS = [
+  { stroke: '#6E3FB5', label: '$168 OF NAME', labelColor: '#6E3FB5', brand: 'ARKET \u00b7 $340', labelBg: '#FFFFFF', labelBorder: '1px solid #C5C8CC', delay: '.05s',
+    paths: '<path d="M40,26 L22,33 L16,126 L84,126 L78,33 L60,26"></path><path d="M40,26 L50,44 L60,26"></path><path d="M50,44 L50,126"></path><path d="M28,36 L24,124"></path><path d="M72,36 L76,124"></path>' },
+  { stroke: '#1F4DFF', label: 'WORTH IT', labelColor: '#1F4DFF', brand: 'UNIQLO \u00b7 $50', labelBg: '#FFFFFF', labelBorder: '1px solid #C5C8CC', delay: '.17s',
+    paths: '<path d="M42,27 L24,34 L18,64 L28,68 L26,104 L74,104 L72,68 L82,64 L76,34 L58,27"></path><path d="M42,27 L50,39 L58,27"></path><path d="M50,39 L50,104"></path>' },
+  { stroke: '#E64A6B', label: 'BAD MATH', labelColor: '#E64A6B', brand: 'REFORMATION \u00b7 $248', labelBg: '#FFFFFF', labelBorder: '1px solid #C5C8CC', delay: '.29s',
+    paths: '<path d="M40,28 L37,46"></path><path d="M60,28 L63,46"></path><path d="M37,46 L31,56 L25,126 L75,126 L69,56 L63,46"></path><path d="M37,46 L50,54 L63,46"></path>' },
+  { stroke: '#2B2A6B', label: 'SELF-DUPE', labelColor: '#2B2A6B', brand: 'LEVI\u2019S \u00b7 $128', labelBg: '#FFFFFF', labelBorder: '1px solid #C5C8CC', delay: '.41s',
+    paths: '<path d="M31,34 L69,34 L71,44 L29,44 Z"></path><path d="M29,44 L25,126 L45,126 L48,62 L52,62 L55,126 L75,126 L71,44"></path><path d="M50,44 L50,58"></path>' },
+  { stroke: '#3B6E5C', label: 'ALL TAG', labelColor: '#3B6E5C', brand: 'ZARA \u00b7 $189', labelBg: '#FFFFFF', labelBorder: '1px solid #C5C8CC', delay: '.53s',
+    paths: '<path d="M40,27 L24,34 L18,54 L23,92 L77,92 L82,54 L76,34 L60,27"></path><path d="M40,27 L50,41 L60,27"></path><path d="M46,41 L41,92"></path><path d="M23,84 L77,84"></path>' },
+  { stroke: '#F08A3E', label: 'WON\u2019T SAY', labelColor: '#F08A3E', brand: 'COS \u00b7 $135', labelBg: 'transparent', labelBorder: '1px dashed #F08A3E', delay: '.65s',
+    paths: '<g stroke-dasharray="5 4"><path d="M40,28 L18,54 L26,60 L26,102 L74,102 L74,60 L82,54 L60,28"></path><path d="M42,29 Q50,38 58,29"></path><path d="M26,94 L74,94"></path></g>' }
+];
+
+const HANGER = '<path stroke="#1A1F26" d="M50,12 C44,12 44,4 50,4 C56,4 56,9 51,11 L50,17"></path><path stroke="#1A1F26" d="M50,17 L14,30 L86,30 L50,17"></path>';
+
+let currentItem = null;
+let liveResult = null; // holds API response when available
+let timers = [];
+let raf = null;
+let driftRaf = null;
+let driftResumeAt = 0;
+let watching = false;
+
+function clearTimers() {
+  timers.forEach(clearTimeout);
+  timers = [];
+  if (raf) cancelAnimationFrame(raf);
+  raf = null;
+}
+
+function showScreen(name) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById('screen-' + name);
+  el.classList.add('active');
+  el.style.animation = 'none';
+  el.offsetHeight;
+  el.style.animation = 'screenIn .3s ease';
+}
+
+function buildRack() {
+  const rack = document.getElementById('rack');
+  // Build two copies for infinite scroll illusion
+  for (let dup = 0; dup < 2; dup++) {
+    const group = document.createElement('div');
+    group.style.cssText = 'display:flex;gap:clamp(6px,1.4vw,18px);flex:none';
+
+    RACK_ITEMS.forEach(item => {
+      const col = document.createElement('div');
+      col.style.cssText = 'display:flex;flex-direction:column;align-items:center;flex:none;width:118px;opacity:0;animation:slideRack .7s cubic-bezier(.22,.9,.35,1.08) ' + item.delay + ' forwards';
+      col.innerHTML = `
+        <svg width="112" height="150" viewBox="0 0 100 134" fill="none" stroke="${item.stroke}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+          ${HANGER}${item.paths}
+        </svg>
+        <div style="width:1.5px;height:10px;background:#1A1F26;opacity:.6"></div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;font-weight:600;letter-spacing:.05em;background:${item.labelBg};border:${item.labelBorder};border-radius:2px;padding:5px 7px;color:${item.labelColor};transform-origin:top center">${item.label}</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#8C9099;margin-top:8px;letter-spacing:.05em">${item.brand}</div>`;
+      group.appendChild(col);
+    });
+
+    // Ghost hangers
+    for (let g = 0; g < 2; g++) {
+      const ghost = document.createElement('div');
+      ghost.style.cssText = 'display:flex;flex-direction:column;align-items:center;flex:none;width:96px;opacity:0;animation:slideRackDim .7s cubic-bezier(.22,.9,.35,1.08) ' + (g === 0 ? '.77s' : '.87s') + ' forwards';
+      ghost.innerHTML = `<svg width="100" height="150" viewBox="0 0 100 134" fill="none" stroke="#1A1F26" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">${HANGER}</svg>`;
+      group.appendChild(ghost);
+    }
+
+    rack.appendChild(group);
+  }
+}
+
+function startDrift() {
+  driftResumeAt = performance.now() + 1800;
+  const rack = document.getElementById('rack');
+  const loop = () => {
+    if (rack.children.length > 1) {
+      const period = rack.children[1].offsetLeft - rack.children[0].offsetLeft;
+      if (period > 0 && rack.scrollWidth - rack.clientWidth > 2) {
+        if (performance.now() > driftResumeAt) rack.scrollLeft += 0.35;
+        if (rack.scrollLeft >= period) rack.scrollLeft -= period;
+        if (rack.scrollLeft < 0) rack.scrollLeft += period;
+      }
+    }
+    driftRaf = requestAnimationFrame(loop);
+  };
+  driftRaf = requestAnimationFrame(loop);
+}
+
+function startRead(id) {
+  clearTimers();
+  currentItem = id;
+  watching = false;
+  const item = DATA[id];
+
+  showScreen('reading');
+
+  const factsEl = document.getElementById('facts-container');
+  factsEl.innerHTML = `
+    <div style="display:flex;align-items:baseline;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:#8C9099">
+      <span style="animation:pulse 1.1s ease infinite">\u25cf</span>
+      <span>${item.pending}</span>
+    </div>`;
+
+  document.getElementById('dollar-display').textContent = id === 'knit' ? '$ \u2014\u2014' : '$0';
+  document.getElementById('progress-bar').style.width = '2%';
+
+  timers.push(setTimeout(() => {
+    document.getElementById('progress-bar').style.width = '100%';
+  }, 80));
+
+  [600, 1300, 2000].forEach((ms, i) => {
+    timers.push(setTimeout(() => {
+      const facts = item.facts.slice(0, i + 1);
+      let html = facts.map(f => `
+        <div style="display:flex;align-items:baseline;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:13px;animation:factIn .35s ease">
+          <span style="color:${f.ok ? '#1A1F26' : '#E64A6B'};font-weight:600">${f.ok ? '\u2713' : '\u2715'}</span>
+          <span>${f.t}</span>
+        </div>`).join('');
+      html += `
+        <div style="display:flex;align-items:baseline;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:#8C9099">
+          <span style="animation:pulse 1.1s ease infinite">\u25cf</span>
+          <span>${item.pending}</span>
+        </div>`;
+      factsEl.innerHTML = html;
+    }, ms));
+  });
+
+  // Animate dollar counter
+  const target = item.est;
+  const t0 = performance.now() + 400;
+  const dur = 2800;
+  const tick = (now) => {
+    const p = Math.min(1, Math.max(0, (now - t0) / dur));
+    const eased = 1 - Math.pow(1 - p, 3);
+    const val = Math.round(target * eased);
+    document.getElementById('dollar-display').textContent = id === 'knit' ? '$ \u2014\u2014' : '$' + val;
+    if (p < 1) raf = requestAnimationFrame(tick);
+  };
+  raf = requestAnimationFrame(tick);
+
+  timers.push(setTimeout(() => showVerdict(), 4100));
+}
+
+function showVerdict() {
+  if (liveResult) {
+    showVerdictLive(liveResult);
+    return;
+  }
+  const item = DATA[currentItem];
+  document.getElementById('v-mono').textContent = item.mono;
+  document.getElementById('v-verdict').textContent = item.verdict;
+  document.getElementById('v-reason').textContent = item.reason;
+  document.getElementById('v-worth').textContent = item.worthStr;
+  document.getElementById('v-costs').textContent = item.costsStr;
+  document.getElementById('v-name').textContent = item.nameStr;
+  document.getElementById('btn-watch').textContent = watching ? 'Watching \u2713' : 'Watch';
+  showScreen('verdict');
+}
+
+function showVerdictLive(v) {
+  // "They won't say." gets its own full-page screen
+  if (v.costs.confidence === 'none') {
+    document.getElementById('ws-brand').textContent = `${v.brand} \u00b7 $${v.price}`.toUpperCase();
+    showScreen('wontsay');
+    return;
+  }
+
+  const mono = `${v.name} \u00b7 ${v.brand} \u00b7 $${v.price}`.toUpperCase();
+  document.getElementById('v-mono').textContent = mono;
+  document.getElementById('v-verdict').textContent = v.call.call;
+  document.getElementById('v-reason').textContent = v.reason;
+
+  const fairBandStr = v.costs.fairBand ? `$${v.costs.fairBand[0]}\u2013${v.costs.fairBand[1]}` : '\u2014';
+  document.getElementById('v-worth').textContent = fairBandStr;
+  document.getElementById('v-costs').textContent = `$${v.price}`;
+  document.getElementById('v-name').textContent = v.costs.theName != null ? `$${v.costs.theName}` : '?';
+  document.getElementById('btn-watch').textContent = watching ? 'Watching \u2713' : 'Watch';
+  showScreen('verdict');
+}
+
+function showBetter() {
+  const item = DATA[currentItem];
+  document.getElementById('b-mono').textContent = 'INSTEAD OF \u00b7 ' + item.mono;
+
+  const contentEl = document.getElementById('b-content');
+  if (item.alts.length === 0) {
+    contentEl.innerHTML = `
+      <div style="font-family:'Instrument Serif',serif;font-size:clamp(28px,4.6vw,42px);line-height:1.1;margin-bottom:12px">This is the better one.</div>
+      <p style="font-size:15.5px;line-height:1.55;color:#8C9099;max-width:440px;text-wrap:pretty">At $3 of name, there\u2019s nothing to undercut. Real cotton, real placket, honest markup. Buy two.</p>`;
+  } else {
+    let html = `<div style="font-family:'Instrument Serif',serif;font-size:clamp(28px,4.6vw,42px);line-height:1.1;margin-bottom:24px">Same cloth, less name.</div>
+      <div style="display:flex;flex-direction:column;gap:14px">`;
+    item.alts.forEach(a => {
+      html += `
+        <div style="background:#FFFFFF;border:1.5px solid #E6E7EA;border-radius:4px;padding:20px 22px;display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap">
+            <div>
+              <span style="font-weight:600;font-size:16px">${a.name}</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:#8C9099;margin-left:10px">${a.brand}</span>
+            </div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:19px;font-weight:600">${a.price}</div>
+          </div>
+          <p style="margin:0;font-size:14px;line-height:1.5;color:#8C9099;text-wrap:pretty">${a.line}</p>
+          <button class="btn-primary btn-take" style="align-self:flex-start;margin-top:4px;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;padding:10px 16px;background:#1F4DFF;color:#FFFFFF;border:none;border-radius:4px;cursor:pointer">Take me there</button>
+        </div>`;
+    });
+    html += '</div>';
+    contentEl.innerHTML = html;
+
+    contentEl.querySelectorAll('.btn-take').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const toast = document.getElementById('toast');
+        toast.style.display = 'block';
+        toast.style.animation = 'none';
+        toast.offsetHeight;
+        toast.style.animation = 'factIn .3s ease';
+        timers.push(setTimeout(() => { toast.style.display = 'none'; }, 2200));
+      });
+    });
+  }
+
+  showScreen('better');
+}
+
+function showShareReceipt() {
+  const receipt = document.getElementById('receipt');
+
+  if (liveResult) {
+    showShareReceiptLive(receipt, liveResult);
+    showScreen('share');
+    return;
+  }
+
+  const item = DATA[currentItem];
+
+  let linesHtml = item.rLines.map(r => `
+    <div style="display:flex;justify-content:space-between;gap:12px;font-size:10.5px;letter-spacing:.04em">
+      <span>${r.l}</span><span style="flex:none">${r.a}</span>
+    </div>`).join('');
+
+  let totalsHtml = item.rTotals.map(r => `
+    <div style="display:flex;justify-content:space-between;gap:12px;font-size:11px;letter-spacing:.04em;font-weight:${r.w};color:${r.c}">
+      <span>${r.l}</span><span style="flex:none">${r.a}</span>
+    </div>`).join('');
+
+  receipt.innerHTML = `
+    <div style="text-align:center;font-size:12px;font-weight:600;letter-spacing:.14em;line-height:1.7">
+      <div style="color:#8C9099;font-size:10.5px">THE FABRIC v.</div>
+      <div>${item.vsName}</div>
+      <div style="color:#8C9099;font-size:9.5px;letter-spacing:.16em;margin-top:2px">${item.vsSub}</div>
+    </div>
+    <div style="border-top:1.5px dashed #C5C8CC;margin:16px 0 12px"></div>
+    <div style="font-size:9.5px;font-weight:600;letter-spacing:.16em;color:#8C9099;margin-bottom:10px">WHAT YOU\u2019RE ACTUALLY BUYING</div>
+    <div style="display:flex;flex-direction:column;gap:7px">${linesHtml}</div>
+    <div style="border-top:1.5px dashed #C5C8CC;margin:14px 0 12px"></div>
+    <div style="display:flex;flex-direction:column;gap:7px">${totalsHtml}</div>
+    <div style="display:flex;justify-content:center;margin:22px 0 16px">
+      <div style="border:3px solid #E64A6B;color:#E64A6B;font-size:13px;font-weight:600;letter-spacing:.14em;padding:9px 14px;transform:rotate(-3.5deg);text-align:center">${item.stamp}</div>
+    </div>
+    <p style="margin:0 0 18px;font-family:Archivo,sans-serif;font-size:12.5px;line-height:1.5;color:#8C9099;text-align:center;text-wrap:pretty">${item.reason}</p>
+    <div style="text-align:center;font-size:9px;letter-spacing:.14em;color:#8C9099">${item.rFooter}</div>`;
+
+  showScreen('share');
+}
+
+function showShareReceiptLive(receipt, v) {
+  const vsName = `${v.brand} ${v.name}`.toUpperCase();
+  const vsSub = v.metaLine;
+
+  let linesHtml = '';
+  if (v.costs.breakdown) {
+    const b = v.costs.breakdown;
+    const lines = [
+      { l: `FABRIC \u00b7 ${b.weightGsm}GSM`, a: `$${b.fabricCost}` },
+      { l: `TRIMS + FEATURES`, a: `$${b.trimsCost}` },
+      { l: `CMT \u00b7 ${b.cmtSource.toUpperCase()}`, a: `$${b.cmtCost}` },
+      { l: 'FREIGHT + DUTY', a: `$${b.freightAndDuty}` },
+    ];
+    linesHtml = lines.map(r => `
+      <div style="display:flex;justify-content:space-between;gap:12px;font-size:10.5px;letter-spacing:.04em">
+        <span>${r.l}</span><span style="flex:none">${r.a}</span>
+      </div>`).join('');
+  }
+
+  const totals = [];
+  if (v.costs.estCost != null) totals.push({ l: 'THE GARMENT', a: `$${v.costs.estCost}`, w: 600, c: '#1A1F26' });
+  if (v.costs.fairBand) totals.push({ l: 'WHAT IT SHOULD HANG AT', a: `$${v.costs.fairBand[0]}\u2013${v.costs.fairBand[1]}`, w: 400, c: '#1A1F26' });
+  totals.push({ l: 'WHAT THE TAG SAYS', a: `$${v.price}`, w: 400, c: '#1A1F26' });
+  if (v.costs.theName != null) totals.push({ l: 'THE NAME', a: `$${v.costs.theName}`, w: 600, c: '#E64A6B' });
+
+  let totalsHtml = totals.map(r => `
+    <div style="display:flex;justify-content:space-between;gap:12px;font-size:11px;letter-spacing:.04em;font-weight:${r.w};color:${r.c}">
+      <span>${r.l}</span><span style="flex:none">${r.a}</span>
+    </div>`).join('');
+
+  const stampText = v.call.call.toUpperCase().replace(/\.$/, '');
+
+  receipt.innerHTML = `
+    <div style="text-align:center;font-size:12px;font-weight:600;letter-spacing:.14em;line-height:1.7">
+      <div style="color:#8C9099;font-size:10.5px">THE FABRIC v.</div>
+      <div>${vsName}</div>
+      <div style="color:#8C9099;font-size:9.5px;letter-spacing:.16em;margin-top:2px">${vsSub}</div>
+    </div>
+    <div style="border-top:1.5px dashed #C5C8CC;margin:16px 0 12px"></div>
+    ${linesHtml ? `
+      <div style="font-size:9.5px;font-weight:600;letter-spacing:.16em;color:#8C9099;margin-bottom:10px">WHAT YOU\u2019RE ACTUALLY BUYING</div>
+      <div style="display:flex;flex-direction:column;gap:7px">${linesHtml}</div>
+      <div style="border-top:1.5px dashed #C5C8CC;margin:14px 0 12px"></div>
+    ` : ''}
+    <div style="display:flex;flex-direction:column;gap:7px">${totalsHtml}</div>
+    <div style="display:flex;justify-content:center;margin:22px 0 16px">
+      <div style="border:3px solid #E64A6B;color:#E64A6B;font-size:13px;font-weight:600;letter-spacing:.14em;padding:9px 14px;transform:rotate(-3.5deg);text-align:center">${stampText}</div>
+    </div>
+    <p style="margin:0 0 18px;font-family:Archivo,sans-serif;font-size:12.5px;line-height:1.5;color:#8C9099;text-align:center;text-wrap:pretty">${v.reason}</p>
+    <div style="text-align:center;font-size:9px;letter-spacing:.14em;color:#8C9099">READTHELABEL.APP/${v.hash || '0000'}</div>`;
+}
+
+function renderScorecardContent(el, opts) {
+  // opts: { itemName, brand, meta, price, shouldHang, verdict, reason, bar, rows, confidence }
+  const { itemName, brand, meta, price, shouldHang, verdict, reason, bar, rows, confidence } = opts;
+
+  // Cost bar
+  let barHtml = '';
+  if (bar) {
+    const garmentPct = ((bar.garment / bar.total) * 100).toFixed(1);
+    const marginPct = ((bar.margin / bar.total) * 100).toFixed(1);
+    const namePct = ((bar.name / bar.total) * 100).toFixed(1);
+    barHtml = `
+      <div style="margin-bottom:32px">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.2em;color:#1A1F26;margin-bottom:12px">WHERE THE ${price} GOES</div>
+        <div style="display:flex;height:40px;border-radius:4px;overflow:hidden;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.02em">
+          <div style="flex:${bar.garment};background:rgba(59,110,92,.18);color:#2D5A47;display:flex;align-items:center;justify-content:center;min-width:0"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 6px">$${bar.garment} (${garmentPct}%)</span></div>
+          <div style="flex:${bar.margin};background:rgba(218,165,32,.15);color:#9A7B00;display:flex;align-items:center;justify-content:center;min-width:0"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 6px">$${bar.margin} (${marginPct}%)</span></div>
+          <div style="flex:${bar.name};background:rgba(230,74,107,.15);color:#C03555;display:flex;align-items:center;justify-content:center;min-width:0"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 6px">$${bar.name} (${namePct}%)</span></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.08em;color:#8C9099;margin-top:6px">
+          <span>the garment</span><span>fair margin, rent, returns</span><span>the name</span>
+        </div>
+      </div>`;
+  }
+
+  // Rows
+  let rowsHtml = rows.map(r => `
+    <div class="sc-row">
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.04em">${r.factor}</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#8C9099;margin-top:3px;letter-spacing:.04em">${r.sub}</div>
+      </div>
+      <div>
+        <div style="font-size:14px;line-height:1.55;color:#1A1F26">${r.evidence}</div>
+        ${r.source ? `<div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;color:#8C9099;margin-top:8px">${r.source}</div>` : ''}
+      </div>
+      <div style="display:flex;justify-content:flex-end">
+        <div class="grade-chip grade-${r.color}">${r.grade}</div>
+      </div>
+    </div>`).join('');
+
+  el.innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px;margin-bottom:24px">
+      <div>
+        <div style="font-size:clamp(22px,3vw,28px);font-weight:600;line-height:1.2">${itemName}</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;color:#8C9099;margin-top:4px">${brand}</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;color:#C5C8CC;margin-top:4px">${meta}</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:clamp(28px,4vw,36px);font-weight:600;line-height:1">${price}</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;color:#8C9099;margin-top:4px">${shouldHang}</div>
+      </div>
+    </div>
+    <div style="background:rgba(230,74,107,.08);border-radius:4px;padding:16px 20px;margin-bottom:28px">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.06em;color:#C03555;margin-bottom:4px">${verdict}</div>
+      <div style="font-size:13.5px;line-height:1.5;color:#8C9099">${reason}</div>
+    </div>
+    ${barHtml}
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.2em;color:#1A1F26;margin-bottom:4px">THE FULL READ</div>
+    ${rowsHtml}
+    <div style="border-top:1px solid #E6E7EA;padding-top:20px;margin-top:8px;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;line-height:1.6;color:#8C9099;max-width:480px">${confidence} <a href="#" style="color:#1F4DFF;text-decoration:none;font-weight:500" onclick="return false">How we read a label</a></div>
+      <button class="btn-primary" id="sc-btn-better" style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;padding:10px 18px;background:#1F4DFF;color:#FFFFFF;border:none;border-radius:4px;cursor:pointer;flex:none">Show me a better one</button>
+    </div>`;
+
+  document.getElementById('sc-btn-better').addEventListener('click', showBetter);
+}
+
+function showScorecard() {
+  const el = document.getElementById('sc-content');
+
+  if (liveResult) {
+    const v = liveResult;
+    const fairStr = v.costs.fairBand ? `should hang at $${v.costs.fairBand[0]}\u2013${v.costs.fairBand[1]}` : 'should hang at\u00a0?';
+    renderScorecardContent(el, {
+      itemName: v.name,
+      brand: v.brand,
+      meta: v.metaLine,
+      price: `$${v.price}`,
+      shouldHang: fairStr,
+      verdict: v.call.call,
+      reason: v.reason,
+      bar: v.bar,
+      rows: v.rows,
+      confidence: v.confidenceText,
+    });
+    showScreen('scorecard');
+    return;
+  }
+
+  // Canned demo data fallback
+  const item = DATA[currentItem];
+  const sc = SCORECARD[currentItem];
+  const isKnit = currentItem === 'knit';
+
+  renderScorecardContent(el, {
+    itemName: sc.itemName,
+    brand: sc.brand,
+    meta: sc.meta,
+    price: sc.price,
+    shouldHang: sc.shouldHang,
+    verdict: item.verdict,
+    reason: item.reason,
+    bar: isKnit ? null : sc.bar,
+    rows: sc.rows,
+    confidence: sc.confidence,
+  });
+  showScreen('scorecard');
+}
+
+// --- Live API ---
+async function readLive(url) {
+  liveResult = null;
+  showScreen('reading');
+
+  const factsEl = document.getElementById('facts-container');
+  factsEl.innerHTML = `
+    <div style="display:flex;align-items:baseline;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:#8C9099">
+      <span style="animation:pulse 1.1s ease infinite">\u25cf</span>
+      <span>FETCHING THE PAGE\u2026</span>
+    </div>`;
+  document.getElementById('dollar-display').textContent = '$\u2014';
+  document.getElementById('progress-bar').style.width = '2%';
+  timers.push(setTimeout(() => {
+    document.getElementById('progress-bar').style.width = '60%';
+  }, 80));
+
+  try {
+    const res = await fetch('/api/read', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url }),
+    });
+    const data = await res.json();
+
+    if (!data.ok) {
+      factsEl.innerHTML = `
+        <div style="display:flex;align-items:baseline;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:13px">
+          <span style="color:#E64A6B;font-weight:600">\u2715</span>
+          <span>${data.error || 'Something went wrong.'}</span>
+        </div>`;
+      document.getElementById('progress-bar').style.width = '100%';
+      timers.push(setTimeout(() => showScreen('home'), 3000));
+      return;
+    }
+
+    liveResult = data.result;
+    document.getElementById('progress-bar').style.width = '100%';
+
+    // Brief animation before showing verdict
+    if (liveResult.costs.estCost) {
+      document.getElementById('dollar-display').textContent = '$' + liveResult.costs.estCost;
+    }
+    factsEl.innerHTML = `
+      <div style="display:flex;align-items:baseline;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:13px;animation:factIn .35s ease">
+        <span style="color:#1A1F26;font-weight:600">\u2713</span>
+        <span>LABEL READ</span>
+      </div>`;
+
+    timers.push(setTimeout(() => showVerdict(), 800));
+  } catch (err) {
+    // Server not running — fall back to demo
+    console.warn('API unavailable, using demo data:', err.message);
+    fallbackDemo();
+  }
+}
+
+function fallbackDemo() {
+  const ids = Object.keys(DATA);
+  liveResult = null;
+  startRead(ids[Math.floor(Math.random() * ids.length)]);
+}
+
+function submitUrl() {
+  clearTimers();
+  const input = document.getElementById('link-input');
+  const url = input.value.trim();
+
+  if (url && (url.startsWith('http://') || url.startsWith('https://'))) {
+    readLive(url);
+  } else {
+    // No URL or invalid — demo mode
+    fallbackDemo();
+  }
+}
+
+// --- Share from "won't say" screen ---
+function showShareFromWontSay() {
+  if (liveResult) {
+    showShareReceipt();
+  }
+}
+
+// Event listeners
+document.getElementById('btn-read').addEventListener('click', submitUrl);
+document.getElementById('link-input').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') submitUrl();
+});
+
+document.getElementById('btn-better').addEventListener('click', showBetter);
+document.getElementById('btn-scorecard').addEventListener('click', showScorecard);
+document.getElementById('btn-share').addEventListener('click', showShareReceipt);
+document.getElementById('btn-watch').addEventListener('click', () => {
+  watching = !watching;
+  document.getElementById('btn-watch').textContent = watching ? 'Watching \u2713' : 'Watch';
+});
+
+document.querySelectorAll('.nav-home').forEach(el => {
+  el.addEventListener('click', () => { clearTimers(); liveResult = null; showScreen('home'); });
+});
+document.getElementById('nav-verdict').addEventListener('click', showVerdict);
+document.getElementById('nav-verdict-2').addEventListener('click', showVerdict);
+document.getElementById('nav-verdict-3').addEventListener('click', showVerdict);
+document.getElementById('ws-scorecard').addEventListener('click', showScorecard);
+document.getElementById('ws-share').addEventListener('click', showShareFromWontSay);
+
+// Init
+buildRack();
+startDrift();
