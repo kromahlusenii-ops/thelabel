@@ -15,6 +15,10 @@ a{color:#1F4DFF}a:hover{color:#2B2A6B}
 @keyframes screenIn{from{opacity:0}to{opacity:1}}
 @keyframes slideRack{from{opacity:0;transform:translateX(-70px)}to{opacity:1;transform:translateX(0)}}
 @keyframes slideRackDim{from{opacity:0;transform:translateX(-70px)}to{opacity:.4;transform:translateX(0)}}
+@keyframes queueBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@keyframes queueIn{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes tapFoot{0%,100%{transform:rotate(0)}25%{transform:rotate(-2deg)}75%{transform:rotate(2deg)}}
+@keyframes bagSwing{0%,100%{transform:rotate(0deg)}50%{transform:rotate(6deg)}}
 
 .screen{display:none}
 .screen.active{display:flex}
@@ -61,14 +65,116 @@ input:focus{border-color:#1F4DFF!important}
 </div>
 
 <!-- SCREEN: Reading the label -->
-<div id="screen-reading" class="screen" style="min-height:100dvh;background:#F2F3F5;align-items:center;justify-content:center;animation:screenIn .3s ease">
-  <div style="width:min(400px,86vw);display:flex;flex-direction:column;gap:26px">
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.3em;color:#1F4DFF">READING THE LABEL</div>
-    <div id="facts-container" style="display:flex;flex-direction:column;gap:12px;min-height:118px"></div>
-    <div id="dollar-display" style="font-family:'IBM Plex Mono',monospace;font-size:clamp(48px,9vw,68px);font-weight:600;letter-spacing:-.02em;line-height:1">$0</div>
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.16em;color:#8C9099;margin-top:-16px">ESTIMATED COST TO MAKE</div>
-    <div style="height:3px;background:rgba(26,31,38,.14);border-radius:2px;overflow:hidden">
-      <div id="progress-bar" style="height:100%;background:#1A1F26;width:2%;transition:width 3.9s linear"></div>
+<div id="screen-reading" class="screen" style="min-height:100dvh;background:#F2F3F5;flex-direction:column;justify-content:center;align-items:center;animation:screenIn .3s ease;padding:clamp(20px,4vw,40px)">
+  <div style="width:min(520px,100%);display:flex;flex-direction:column;align-items:center;gap:clamp(20px,4vh,36px)">
+
+    <!-- Queue illustration -->
+    <div style="display:flex;align-items:flex-end;gap:clamp(4px,2vw,14px);height:clamp(120px,22vh,180px);position:relative">
+
+      <!-- Person 1: tall, holding a coat over arm, tapping foot -->
+      <svg viewBox="0 0 60 140" fill="none" stroke="#1A1F26" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="height:100%;width:auto;opacity:0;animation:queueIn .5s ease .1s forwards">
+        <circle cx="30" cy="16" r="8"/>
+        <line x1="30" y1="24" x2="30" y2="70"/>
+        <line x1="30" y1="34" x2="14" y2="52"/>
+        <line x1="30" y1="34" x2="46" y2="48"/>
+        <line x1="30" y1="70" x2="20" y2="100"/>
+        <line x1="30" y1="70" x2="40" y2="100"/>
+        <g style="animation:tapFoot 1.2s ease infinite">
+          <line x1="20" y1="100" x2="14" y2="108"/>
+        </g>
+        <line x1="40" y1="100" x2="46" y2="108"/>
+        <!-- coat draped over arm -->
+        <path d="M14,48 Q8,52 6,62 Q4,72 10,74 L18,56" stroke="#6E3FB5" stroke-width="2"/>
+      </svg>
+
+      <!-- Person 2: shorter, holding shopping bag, bobbing -->
+      <svg viewBox="0 0 56 130" fill="none" stroke="#1A1F26" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="height:88%;width:auto;opacity:0;animation:queueIn .5s ease .25s forwards">
+        <g style="animation:queueBob 2.4s ease infinite .3s">
+          <circle cx="28" cy="18" r="7.5"/>
+          <line x1="28" y1="25" x2="28" y2="66"/>
+          <line x1="28" y1="35" x2="12" y2="50"/>
+          <line x1="28" y1="35" x2="44" y2="54"/>
+          <line x1="28" y1="66" x2="20" y2="96"/>
+          <line x1="28" y1="66" x2="36" y2="96"/>
+          <line x1="20" y1="96" x2="16" y2="104"/>
+          <line x1="36" y1="96" x2="40" y2="104"/>
+          <!-- shopping bag swinging from hand -->
+          <g style="transform-origin:44px 54px;animation:bagSwing 1.8s ease infinite .6s">
+            <rect x="38" y="54" width="14" height="16" rx="1" stroke="#1F4DFF" stroke-width="1.5"/>
+            <path d="M41,54 Q41,48 45,48 Q49,48 49,54" stroke="#1F4DFF" stroke-width="1.2" fill="none"/>
+          </g>
+        </g>
+      </svg>
+
+      <!-- Person 3: medium height, checking phone, garment bag over shoulder -->
+      <svg viewBox="0 0 60 135" fill="none" stroke="#1A1F26" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="height:93%;width:auto;opacity:0;animation:queueIn .5s ease .4s forwards">
+        <circle cx="30" cy="16" r="7"/>
+        <line x1="30" y1="23" x2="30" y2="66"/>
+        <line x1="30" y1="33" x2="16" y2="55"/>
+        <!-- arm holding phone -->
+        <line x1="30" y1="33" x2="42" y2="46"/>
+        <line x1="42" y1="46" x2="42" y2="56"/>
+        <rect x="39" y="54" width="7" height="11" rx="1.5" stroke-width="1.2"/>
+        <line x1="30" y1="66" x2="22" y2="98"/>
+        <line x1="30" y1="66" x2="38" y2="98"/>
+        <line x1="22" y1="98" x2="18" y2="106"/>
+        <line x1="38" y1="98" x2="42" y2="106"/>
+        <!-- garment bag over shoulder -->
+        <g style="animation:bagSwing 3s ease infinite">
+          <path d="M16,50 L10,34 Q8,22 12,20 L20,20 Q24,22 22,34 L18,44" stroke="#E64A6B" stroke-width="1.5"/>
+          <line x1="15" y1="24" x2="15" y2="28" stroke="#E64A6B" stroke-width="1"/>
+        </g>
+      </svg>
+
+      <!-- Person 4: kid / short person bouncing, holding hanger -->
+      <svg viewBox="0 0 50 120" fill="none" stroke="#1A1F26" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="height:72%;width:auto;opacity:0;animation:queueIn .5s ease .55s forwards">
+        <g style="animation:queueBob 1.6s ease infinite .1s">
+          <circle cx="25" cy="16" r="7"/>
+          <line x1="25" y1="23" x2="25" y2="56"/>
+          <line x1="25" y1="32" x2="12" y2="44"/>
+          <line x1="25" y1="32" x2="38" y2="40"/>
+          <line x1="25" y1="56" x2="18" y2="80"/>
+          <line x1="25" y1="56" x2="32" y2="80"/>
+          <line x1="18" y1="80" x2="14" y2="88"/>
+          <line x1="32" y1="80" x2="36" y2="88"/>
+          <!-- hanger held up -->
+          <path d="M38,36 L42,26 Q42,18 38,18 Q34,18 34,22" stroke="#3B6E5C" stroke-width="1.5"/>
+          <path d="M36,26 L44,26" stroke="#3B6E5C" stroke-width="1.5"/>
+        </g>
+      </svg>
+
+      <!-- Person 5: faded, just arrived, still walking in -->
+      <svg viewBox="0 0 55 135" fill="none" stroke="#1A1F26" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="height:90%;width:auto;opacity:0;animation:queueIn .5s ease .7s forwards" opacity="0.35">
+        <circle cx="28" cy="16" r="7.5"/>
+        <line x1="28" y1="24" x2="28" y2="68"/>
+        <line x1="28" y1="34" x2="14" y2="52"/>
+        <line x1="28" y1="34" x2="42" y2="50"/>
+        <line x1="28" y1="68" x2="20" y2="98"/>
+        <line x1="28" y1="68" x2="36" y2="98"/>
+        <line x1="20" y1="98" x2="16" y2="106"/>
+        <line x1="36" y1="98" x2="40" y2="106"/>
+      </svg>
+
+      <!-- Cashier desk on the left -->
+      <div style="position:absolute;left:-10px;bottom:0;width:clamp(28px,6vw,42px);height:clamp(40px,8vh,60px);border:1.8px solid #1A1F26;border-radius:3px 3px 0 0;background:#FFFFFF;display:flex;align-items:flex-start;justify-content:center;padding-top:6px">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:7px;font-weight:600;letter-spacing:.1em;color:#1F4DFF;writing-mode:vertical-lr;text-orientation:mixed">NEXT</div>
+      </div>
+    </div>
+
+    <!-- Floor line -->
+    <div style="width:min(400px,90%);height:1.5px;background:#C5C8CC;margin-top:-10px"></div>
+
+    <!-- Status area -->
+    <div style="width:min(400px,90%);display:flex;flex-direction:column;gap:clamp(14px,2.5vh,22px)">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.3em;color:#1F4DFF">READING THE LABEL</div>
+      <div id="facts-container" style="display:flex;flex-direction:column;gap:12px;min-height:80px"></div>
+      <div style="display:flex;align-items:baseline;gap:12px">
+        <div id="dollar-display" style="font-family:'IBM Plex Mono',monospace;font-size:clamp(40px,8vw,62px);font-weight:600;letter-spacing:-.02em;line-height:1">$0</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;color:#8C9099">EST. COST TO MAKE</div>
+      </div>
+      <div style="height:3px;background:rgba(26,31,38,.14);border-radius:2px;overflow:hidden">
+        <div id="progress-bar" style="height:100%;background:#1A1F26;width:2%;transition:width 3.9s linear"></div>
+      </div>
     </div>
   </div>
 </div>
