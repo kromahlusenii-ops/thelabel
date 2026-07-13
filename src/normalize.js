@@ -1,7 +1,8 @@
 const TRACKING_PARAMS = new Set([
   'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content',
   'gclid', 'gclsrc', 'srsltid', 'fbclid', 'msclkid', 'dclid',
-  'mc_cid', 'mc_eid', 'ref', 'ref_', '_ga', '_gl',
+  'mc_cid', 'mc_eid', 'ref', 'ref_', '_ga', '_gl', '_up', '_gs',
+  'gbraid', 'wbraid',
 ]);
 
 const CATEGORY_PATH_PATTERNS = [

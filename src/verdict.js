@@ -292,7 +292,7 @@ async function generateReason(extraction, costs, call) {
     const prompt = `Write ONE sentence (max 25 words) explaining why this ${extraction.category} is "${call.call}" at $${extraction.price}. Name a material fact first, then the number. Fiber: ${fiberStr}. Cost to make: ~$${costs.estCost}. Multiple: ${costs.multiple}x. Be sharp, not mean. No quotes around the sentence.`;
 
     const response = await client.messages.create({
-      model: 'claude-sonnet-4-20250514',
+      model: 'claude-sonnet-4-6',
       max_tokens: 80,
       messages: [{ role: 'user', content: prompt }],
     });

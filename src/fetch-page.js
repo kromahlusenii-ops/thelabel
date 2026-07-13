@@ -34,13 +34,14 @@ function extractJsonLd(html) {
 }
 
 function isBotCheck(html) {
+  // Only flag as bot check on short pages — real product pages are large
+  if (html.length > 20000) return false;
   const lower = html.toLowerCase();
   return (
-    lower.includes('captcha') ||
     lower.includes('cf-challenge') ||
-    lower.includes('please verify') ||
+    lower.includes('please verify you are a human') ||
     lower.includes('access denied') ||
-    (lower.includes('checking your browser') && html.length < 10000)
+    lower.includes('checking your browser')
   );
 }
 

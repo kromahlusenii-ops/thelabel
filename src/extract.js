@@ -155,7 +155,7 @@ export async function extractProduct(html, jsonLd) {
   }
 
   const response = await client.messages.create({
-    model: 'claude-sonnet-4-20250514',
+    model: 'claude-sonnet-4-6',
     max_tokens: 1024,
     system: EXTRACTION_SYSTEM,
     messages: [{
@@ -185,7 +185,7 @@ export async function extractReviews(html) {
   }
 
   const response = await client.messages.create({
-    model: 'claude-sonnet-4-20250514',
+    model: 'claude-sonnet-4-6',
     max_tokens: 1024,
     system: REVIEW_SYSTEM,
     messages: [{
