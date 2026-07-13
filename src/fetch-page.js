@@ -1,9 +1,9 @@
-let logFetch;
-try {
-  const db = await import('./db.js');
-  logFetch = db.logFetch;
-} catch {
-  logFetch = () => {}; // no-op when SQLite unavailable (serverless)
+let logFetch = () => {};
+if (!process.env.VERCEL) {
+  try {
+    const db = await import('./db.js');
+    logFetch = db.logFetch;
+  } catch {}
 }
 
 const BROWSER_UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36';
@@ -49,18 +49,22 @@ async function fetchViaProxy(url) {
   const proxyKey = process.env.SCRAPING_API_KEY;
   if (!proxyKey) return null;
 
+  console.log('[proxy] attempting ScraperAPI for:', url);
   const proxyUrl = `https://api.scraperapi.com?api_key=${encodeURIComponent(proxyKey)}&url=${encodeURIComponent(url)}&render=false`;
 
   try {
     const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 15000);
+    const timer = setTimeout(() => controller.abort(), 25000);
     const res = await fetch(proxyUrl, { signal: controller.signal });
     clearTimeout(timer);
+    console.log('[proxy] status:', res.status);
     if (!res.ok) return null;
     const html = await res.text();
-    if (html.length < MIN_BODY_LENGTH) return null;
+    console.log('[proxy] html length:', html.length);
+    if (html.length < 500) return null;
     return { html, statusCode: 200 };
-  } catch {
+  } catch (err) {
+    console.log('[proxy] error:', err.message);
     return null;
   }
 }
