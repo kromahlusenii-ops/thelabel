@@ -429,7 +429,6 @@ function showVerdict() {
   document.getElementById('v-worth').textContent = item.worthStr;
   document.getElementById('v-costs').textContent = item.costsStr;
   document.getElementById('v-name').textContent = item.nameStr;
-  document.getElementById('btn-watch').textContent = watching ? 'Watching \u2713' : 'Watch';
   showScreen('verdict');
 }
 
@@ -450,7 +449,6 @@ function showVerdictLive(v) {
   document.getElementById('v-worth').textContent = fairBandStr;
   document.getElementById('v-costs').textContent = `$${v.price}`;
   document.getElementById('v-name').textContent = v.costs.theName != null ? `$${v.costs.theName}` : '?';
-  document.getElementById('btn-watch').textContent = watching ? 'Watching \u2713' : 'Watch';
   showScreen('verdict');
 }
 
@@ -652,10 +650,8 @@ function renderScorecardContent(el, opts) {
     ${rowsHtml}
     <div style="border-top:1px solid #E6E7EA;padding-top:20px;margin-top:8px;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;line-height:1.6;color:#8C9099;max-width:480px">${confidence} <a href="#" style="color:#1F4DFF;text-decoration:none;font-weight:500" onclick="return false">How we read a label</a></div>
-      <button class="btn-primary" id="sc-btn-better" style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;padding:10px 18px;background:#1F4DFF;color:#FFFFFF;border:none;border-radius:4px;cursor:pointer;flex:none">Show me a better one</button>
+      <button id="sc-btn-better" style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;padding:10px 18px;background:#E6E7EA;color:#8C9099;border:none;border-radius:4px;cursor:default;flex:none">Show me a better one <span style="font-size:9px;font-weight:400;letter-spacing:.12em;margin-left:4px">COMING SOON</span></button>
     </div>`;
-
-  document.getElementById('sc-btn-better').addEventListener('click', showBetter);
 }
 
 function showScorecard() {
@@ -798,13 +794,8 @@ document.getElementById('link-input').addEventListener('keydown', (e) => {
   if (e.key === 'Enter') submitUrl();
 });
 
-document.getElementById('btn-better').addEventListener('click', showBetter);
 document.getElementById('btn-scorecard').addEventListener('click', showScorecard);
 document.getElementById('btn-share').addEventListener('click', showShareReceipt);
-document.getElementById('btn-watch').addEventListener('click', () => {
-  watching = !watching;
-  document.getElementById('btn-watch').textContent = watching ? 'Watching \u2713' : 'Watch';
-});
 
 document.querySelectorAll('.nav-home').forEach(el => {
   el.addEventListener('click', () => { clearTimers(); liveResult = null; showScreen('home'); });
