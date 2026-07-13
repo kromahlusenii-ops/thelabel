@@ -751,9 +751,15 @@ async function readLive(url) {
 
     timers.push(setTimeout(() => showVerdict(), 800));
   } catch (err) {
-    // Server not running — fall back to demo
-    console.warn('API unavailable, using demo data:', err.message);
-    fallbackDemo();
+    console.warn('API unavailable:', err.message);
+    const factsEl = document.getElementById('facts-container');
+    factsEl.innerHTML = `
+      <div style="display:flex;align-items:baseline;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:13px">
+        <span style="color:#E64A6B;font-weight:600">\u2715</span>
+        <span>Can\u2019t reach the server. Try again.</span>
+      </div>`;
+    document.getElementById('progress-bar').style.width = '100%';
+    timers.push(setTimeout(() => showScreen('home'), 3000));
   }
 }
 
@@ -771,8 +777,11 @@ function submitUrl() {
   if (url && (url.startsWith('http://') || url.startsWith('https://'))) {
     readLive(url);
   } else {
-    // No URL or invalid — demo mode
-    fallbackDemo();
+    // Shake the input to prompt for a URL
+    input.style.animation = 'none';
+    input.offsetHeight;
+    input.style.animation = 'shake .4s ease';
+    input.focus();
   }
 }
 
