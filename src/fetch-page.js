@@ -54,8 +54,15 @@ async function fetchTier1(url, domain) {
     const res = await fetch(url, {
       headers: {
         'User-Agent': BROWSER_UA,
-        'Accept': 'text/html,application/xhtml+xml',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
         'Accept-Language': 'en-US,en;q=0.9',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Cache-Control': 'no-cache',
+        'Sec-Fetch-Dest': 'document',
+        'Sec-Fetch-Mode': 'navigate',
+        'Sec-Fetch-Site': 'none',
+        'Sec-Fetch-User': '?1',
+        'Upgrade-Insecure-Requests': '1',
       },
       redirect: 'follow',
       signal: controller.signal,
@@ -114,6 +121,71 @@ async function fetchTier2(url, domain) {
   }
 }
 
+// Shopify stores expose /products/{handle}.json — try this as a fast structured fallback
+async function fetchShopifyJson(url, domain) {
+  // Extract product handle from Shopify-style URLs
+  const match = url.match(/\/products\/([^?#/]+)/);
+  if (!match) return null;
+
+  const handle = match[1];
+  const jsonUrl = `https://${domain}/products/${handle}.json`;
+
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), TIER1_TIMEOUT);
+
+    const res = await fetch(jsonUrl, {
+      headers: {
+        'User-Agent': BROWSER_UA,
+        'Accept': 'application/json',
+      },
+      redirect: 'follow',
+      signal: controller.signal,
+    });
+    clearTimeout(timer);
+
+    if (!res.ok) return null;
+
+    const data = await res.json();
+    if (!data?.product) return null;
+
+    const p = data.product;
+    const variant = p.variants?.[0];
+
+    // Build a minimal JSON-LD-style object from the Shopify JSON
+    const jsonLd = [{
+      '@type': 'Product',
+      name: p.title,
+      brand: p.vendor,
+      description: (p.body_html || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim(),
+      offers: {
+        price: variant?.price || '0',
+        priceCurrency: 'USD',
+      },
+    }];
+
+    // Build a synthetic HTML from the Shopify data for the extractor
+    const bodyText = (p.body_html || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+    const tags = (p.tags || []).join(', ');
+    const html = `
+      <title>${p.title} - ${p.vendor}</title>
+      <div class="product">
+        <h1>${p.title}</h1>
+        <div class="vendor">${p.vendor}</div>
+        <div class="price">${variant?.price || ''}</div>
+        <div class="type">${p.product_type || ''}</div>
+        <div class="description">${bodyText}</div>
+        <div class="tags">${tags}</div>
+      </div>
+      <script type="application/ld+json">${JSON.stringify(jsonLd[0])}</script>
+    `;
+
+    return { html, statusCode: 200 };
+  } catch {
+    return null;
+  }
+}
+
 export async function fetchProductPage(url, domain) {
   // Check if this domain is known to need headless
   const skipTier1 = HEADLESS_ONLY.has(domain);
@@ -122,6 +194,11 @@ export async function fetchProductPage(url, domain) {
 
   if (!skipTier1) {
     result = await fetchTier1(url, domain);
+  }
+
+  // Shopify JSON API fallback — works even when HTML fetch is blocked
+  if (!result) {
+    result = await fetchShopifyJson(url, domain);
   }
 
   if (!result) {
