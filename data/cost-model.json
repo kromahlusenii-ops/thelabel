@@ -1,0 +1,159 @@
+{
+  "fabricYield": {
+    "coat": 2.8,
+    "jacket": 2.2,
+    "shirt": 1.8,
+    "knit": 1.2,
+    "dress": 2.0,
+    "trousers": 1.6,
+    "jeans": 1.5,
+    "tee": 1.2,
+    "shoes": 0.8,
+    "bag": 0.6,
+    "other": 1.5
+  },
+  "fiberPricePerMeter": {
+    "wool":         { "base": 8.0,  "perGsm": 0.028 },
+    "cashmere":     { "base": 40.0, "perGsm": 0.08 },
+    "cotton":       { "base": 3.0,  "perGsm": 0.015 },
+    "linen":        { "base": 7.0,  "perGsm": 0.02 },
+    "silk":         { "base": 16.0, "perGsm": 0.04 },
+    "polyester":    { "base": 1.5,  "perGsm": 0.006 },
+    "nylon":        { "base": 2.5,  "perGsm": 0.009 },
+    "viscose":      { "base": 5.5,  "perGsm": 0.018 },
+    "rayon":        { "base": 5.5,  "perGsm": 0.018 },
+    "acrylic":      { "base": 1.8,  "perGsm": 0.006 },
+    "polyurethane": { "base": 1.5,  "perGsm": 0.005 },
+    "elastane":     { "base": 5.0,  "perGsm": 0.018 },
+    "spandex":      { "base": 5.0,  "perGsm": 0.018 },
+    "modal":        { "base": 3.5,  "perGsm": 0.011 },
+    "lyocell":      { "base": 4.5,  "perGsm": 0.013 },
+    "tencel":       { "base": 4.5,  "perGsm": 0.013 },
+    "hemp":         { "base": 6.0,  "perGsm": 0.016 },
+    "ramie":        { "base": 5.0,  "perGsm": 0.014 },
+    "alpaca":       { "base": 20.0, "perGsm": 0.05 },
+    "mohair":       { "base": 15.0, "perGsm": 0.04 },
+    "down":         { "base": 12.0, "perGsm": 0.03 },
+    "leather":      { "base": 25.0, "perGsm": 0.05 }
+  },
+  "cmtRatePerMinute": {
+    "italy":       0.28,
+    "portugal":    0.18,
+    "spain":       0.20,
+    "france":      0.26,
+    "uk":          0.25,
+    "usa":         0.30,
+    "japan":       0.30,
+    "turkey":      0.12,
+    "morocco":     0.11,
+    "tunisia":     0.10,
+    "romania":     0.13,
+    "bulgaria":    0.11,
+    "china":       0.22,
+    "vietnam":     0.13,
+    "bangladesh":  0.14,
+    "india":       0.13,
+    "cambodia":    0.10,
+    "indonesia":   0.12,
+    "myanmar":     0.09,
+    "pakistan":     0.11,
+    "sri lanka":   0.12,
+    "ethiopia":    0.08,
+    "madagascar":  0.09
+  },
+  "sewMinutes": {
+    "coat": 120,
+    "jacket": 85,
+    "shirt": 50,
+    "knit": 25,
+    "dress": 75,
+    "trousers": 40,
+    "jeans": 65,
+    "tee": 18,
+    "shoes": 70,
+    "bag": 45,
+    "other": 35
+  },
+  "trimsBase": {
+    "coat": 5.0,
+    "jacket": 4.5,
+    "shirt": 2.0,
+    "knit": 1.0,
+    "dress": 2.5,
+    "trousers": 2.5,
+    "jeans": 3.5,
+    "tee": 1.0,
+    "shoes": 8.0,
+    "bag": 6.0,
+    "other": 2.0
+  },
+  "featureCost": {
+    "horn buttons": 3.5,
+    "corozo buttons": 3.0,
+    "mother of pearl buttons": 4.0,
+    "shell buttons": 2.5,
+    "metal buttons": 1.5,
+    "ykk zip": 1.5,
+    "riri zip": 4.0,
+    "french seams": 2.0,
+    "flat-felled seams": 1.5,
+    "set-in sleeves": 1.0,
+    "raglan sleeves": 0.5,
+    "full lining": 5.0,
+    "half lining": 3.0,
+    "full canvas": 12.0,
+    "half canvas": 8.0,
+    "fused": 1.0,
+    "chain-stitched hem": 1.5,
+    "rivets": 1.0,
+    "real leather trim": 3.0,
+    "bias cut": 2.0,
+    "pattern matching": 2.0,
+    "hand finishing": 5.0
+  },
+  "categoryBenchmarks": {
+    "coat": {
+      "fiberExpectation": "70–100% wool",
+      "priceRange": "$200–500"
+    },
+    "jacket": {
+      "fiberExpectation": "real leather or heavy cotton",
+      "priceRange": "$100–400"
+    },
+    "shirt": {
+      "fiberExpectation": "100% cotton",
+      "priceRange": "$30–120"
+    },
+    "knit": {
+      "fiberExpectation": "wool, cashmere, or cotton",
+      "priceRange": "$40–200"
+    },
+    "dress": {
+      "fiberExpectation": "silk, viscose, or cotton",
+      "priceRange": "$60–300"
+    },
+    "trousers": {
+      "fiberExpectation": "wool or cotton",
+      "priceRange": "$50–250"
+    },
+    "jeans": {
+      "fiberExpectation": "100% cotton denim",
+      "priceRange": "$40–200"
+    },
+    "tee": {
+      "fiberExpectation": "100% cotton",
+      "priceRange": "$15–60"
+    }
+  },
+  "defaultWeight": {
+    "coat": 430,
+    "jacket": 300,
+    "shirt": 140,
+    "knit": 200,
+    "dress": 120,
+    "trousers": 250,
+    "jeans": 350,
+    "tee": 160,
+    "other": 200
+  }
+}

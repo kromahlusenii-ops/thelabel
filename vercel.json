@@ -1,0 +1,10 @@
+{
+  "buildCommand": "",
+  "outputDirectory": "",
+  "functions": {
+    "api/read.js": {
+      "memory": 1024,
+      "maxDuration": 30
+    }
+  }
+}
