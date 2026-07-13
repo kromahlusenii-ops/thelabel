@@ -45,6 +45,26 @@ function isBotCheck(html) {
   );
 }
 
+async function fetchViaProxy(url) {
+  const proxyKey = process.env.SCRAPING_API_KEY;
+  if (!proxyKey) return null;
+
+  const proxyUrl = `https://api.scraperapi.com?api_key=${encodeURIComponent(proxyKey)}&url=${encodeURIComponent(url)}&render=false`;
+
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 15000);
+    const res = await fetch(proxyUrl, { signal: controller.signal });
+    clearTimeout(timer);
+    if (!res.ok) return null;
+    const html = await res.text();
+    if (html.length < MIN_BODY_LENGTH) return null;
+    return { html, statusCode: 200 };
+  } catch {
+    return null;
+  }
+}
+
 async function fetchTier1(url, domain) {
   const t0 = Date.now();
   try {
@@ -196,9 +216,14 @@ export async function fetchProductPage(url, domain) {
     result = await fetchTier1(url, domain);
   }
 
-  // Shopify JSON API fallback — works even when HTML fetch is blocked
+  // Shopify JSON API fallback
   if (!result) {
     result = await fetchShopifyJson(url, domain);
+  }
+
+  // Scraping proxy fallback (if SCRAPING_API_KEY is set)
+  if (!result) {
+    result = await fetchViaProxy(url);
   }
 
   if (!result) {
